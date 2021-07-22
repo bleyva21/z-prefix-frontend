@@ -1,0 +1,7 @@
+.createMain{
+    display: flex;
+    flex-wrap: wrap;
+    width: 60%;
+    margin: auto;
+    margin-top: 3%;
+}
