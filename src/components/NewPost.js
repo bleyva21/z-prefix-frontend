@@ -24,13 +24,18 @@ function NewPost(){
     const [titleValue, setTitleValue] = useState('');
     const [imageUrl, setImageUrl] = useState('')
 
-    async function postBlog(data){
+    async function postBlog(){
         await fetch('http://localhost:3001/blogs', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(data)
+            body: JSON.stringify({
+                author: nameValue,
+                title: titleValue,
+                image: imageUrl,
+                text: bodyValue
+            })
         })
     }
 
@@ -51,14 +56,10 @@ function NewPost(){
     }
 
 
-    function handleSubmit(){
-        postBlog({
-            name: nameValue,
-            title: titleValue,
-            image: imageUrl,
-            text: bodyValue
-        })
-        window.location.href = 'http://localhost:3000'
+    function handleSubmit(e){
+        e.preventDefault()
+        postBlog()
+        window.location.href = 'http://localhost:3000/'
     }
 
     return (
