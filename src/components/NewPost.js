@@ -25,7 +25,7 @@ function NewPost(){
     const [imageUrl, setImageUrl] = useState('')
 
     async function postBlog(){
-        await fetch('http://localhost:3001/blogs', {
+        await fetch('https://leyva-z-prefix-backend.herokuapp.com/blogs', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

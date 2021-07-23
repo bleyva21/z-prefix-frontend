@@ -14,7 +14,7 @@ import Modal from '@material-ui/core/Modal';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 600,
+    
     minWidth: 600
   },
   media: {
@@ -66,7 +66,7 @@ function Home(){
     };
 
     async function fetchBlogs(){
-        await fetch('http://localhost:3001/blogs')
+        await fetch('https://leyva-z-prefix-backend.herokuapp.com/blogs')
               .then(res => res.json())
               .then(data => setBlogs(data))
     }
@@ -76,7 +76,7 @@ function Home(){
     }, [])
 
     async function handleDelete(){
-        await fetch('http://localhost:3001/blogs', {
+        await fetch('https://leyva-z-prefix-backend.herokuapp.com/blogs', {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
@@ -86,7 +86,7 @@ function Home(){
             })
         })
         setOpen(false)
-        window.location.href = 'http://localhost:3001'
+        window.location.href = 'http://localhost:3000'
     }
 
     function html(){
@@ -105,23 +105,28 @@ function Home(){
             {blogs.map(item => (
             <Card className={classes.root}>
                 <CardActionArea>
-                    <CardMedia
+                    {item.image !== '' ?
+                    (<CardMedia
                         className={classes.media}
                         image={item.image}
-                    />
+                    />):(<></>)}
                     <CardContent className={classes.content}>
                         <Typography gutterBottom variant="h5" component="h2">
                             {item.title}
                         </Typography>
+                        <h3>by {item.author}</h3>
                         <Typography variant="body2" color="textSecondary" component="p">
                             {item.text}
                         </Typography>
                     </CardContent>
                 </CardActionArea>
                 <CardActions>
+                    <Link style={{textDecoration: 'none', color: 'inherit'}} to={{ pathname: '/editpost',
+                                                                                   state: {item: item} }}>
                     <Button size="small" color="primary">
                         Edit
                     </Button>
+                    </Link>
                     <Button size="small" color="primary" onClick={() => handleOpen(item.id)}>
                         Delete
                     </Button>
