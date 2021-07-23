@@ -63,7 +63,7 @@ function EditPost(){
     function handleSubmit(e){
         e.preventDefault()
         updateBlog()
-        window.location.href = 'http://localhost:3000/'
+        window.location.href = 'https://leyva-z-prefix-frontend.herokuapp.com/'
     }
 
     return(
